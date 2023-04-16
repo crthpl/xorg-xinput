@@ -46,6 +46,14 @@ XDeviceInfo* find_device_info( Display *display, char *name, Bool only_extended)
 #if HAVE_XI2
 XIDeviceInfo* xi2_find_device_info(Display *display, char *name);
 int xinput_version(Display* display);
+enum print_format {
+    FORMAT_NONE,
+    FORMAT_SHORT,
+    FORMAT_LONG,
+    FORMAT_NAME,
+    FORMAT_ID,
+};
+void print_info_xi2(Display* display, XIDeviceInfo *dev, enum print_format format);
 #endif
 
 int get_feedbacks( Display* display, int argc, char *argv[], char *prog_name, char *prog_desc);
@@ -78,6 +86,7 @@ int remove_master( Display* display, int argc, char *argv[], char *prog_name, ch
 int change_attachment( Display* display, int argc, char *argv[], char *prog_name, char *prog_desc);
 int float_device( Display* display, int argc, char *argv[], char *prog_name, char *prog_desc);
 int set_clientpointer( Display* display, int argc, char *argv[], char *prog_name, char *prog_desc);
+int get_clientpointer( Display* display, int argc, char *argv[], char *prog_name, char *prog_desc);
 int test_xi2( Display* display, int argc, char *argv[], char *prog_name, char *prog_desc);
 int map_to_output( Display* display, int argc, char *argv[], char *prog_name, char *prog_desc);
 

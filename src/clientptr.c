@@ -56,3 +56,41 @@ set_clientpointer(Display* dpy, int argc, char** argv, char* name, char *desc)
     XISetClientPointer(dpy, window, info->deviceid);
     return 0;
 }
+
+int
+get_clientpointer(Display* dpy, int argc, char** argv, char* name, char *desc)
+{
+    XID window;
+    char* id;
+    char* dummy;
+	int deviceid;
+	char devicestr[6]; // max is 65535
+	XIDeviceInfo *info;
+
+    if (argc <= 0)
+    {
+        fprintf(stderr, "Usage: xinput %s %s\n", name, desc);
+        return EXIT_FAILURE;
+    }
+
+    id = argv[0];
+
+    while(*id == '0') id++;
+
+    window = strtol(argv[0], &dummy, (*id == 'x') ? 16 : 10);
+
+	Bool ret = XIGetClientPointer(dpy, window, &deviceid);
+
+	sprintf(devicestr, "%d", deviceid);
+    info = xi2_find_device_info(dpy, devicestr);
+
+    if (!info) {
+		fprintf(stderr, "unable to find client pointer device '%d'\n", deviceid);
+		return EXIT_FAILURE;
+    }
+
+	print_info_xi2(dpy, info, FORMAT_SHORT);
+	printf("ret: %d", ret);
+    return 0;
+}
+

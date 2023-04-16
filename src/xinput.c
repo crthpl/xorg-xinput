@@ -100,6 +100,10 @@ static entry drivers[] =
       "<window> <device>",
       set_clientpointer
     },
+	{ "get-cp",
+	  "<window>",
+	  get_clientpointer
+	},
     { "test-xi2",
       "[--root] <device>",
       test_xi2,

@@ -24,15 +24,6 @@
 #include "xinput.h"
 #include <string.h>
 
-enum print_format {
-    FORMAT_NONE,
-    FORMAT_SHORT,
-    FORMAT_LONG,
-    FORMAT_NAME,
-    FORMAT_ID,
-};
-
-
 static void
 print_info(Display* dpy, XDeviceInfo	*info, enum print_format format)
 {
@@ -245,7 +236,7 @@ print_classes_xi2(Display* display, XIAnyClassInfo **classes,
     printf("\n");
 }
 
-static void
+void
 print_info_xi2(Display* display, XIDeviceInfo *dev, enum print_format format)
 {
     if (format == FORMAT_NAME)
